@@ -164,12 +164,13 @@ nav {
   box-shadow: var(--dark-shadow);
 }
 .nav-center {
-  width: 90vw;
-  max-width: var(--fixed-width);
+  width: 90vw; /* vw is quirksmode = view window */
+  max-width: var(--fixed-width); /* this is set as 620px */
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: solid red 1px;
 }
 .nav-center h4 {
   margin-bottom: 0;
@@ -201,6 +202,7 @@ main {
 }
 .container {
   text-align: center;
+  border: solid green 1px;
 }
 .container h2 {
   background: var(--clr-black);
@@ -215,16 +217,15 @@ main {
 .btn-hero {
   font-family: var(--ff-primary);
   text-transform: uppercase;
-  background: transparent;
-  color: var(--clr-black);
+  background: green;
+  color: var(--clr-white);
   letter-spacing: var(--spacing);
   display: inline-block;
   font-weight: 700;
   transition: var(--transition);
-  border: 2px solid var(--clr-black);
+  border: none;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  border-radius: var(--radius);
   font-size: 1rem;
   padding: 0.75rem 1.25rem;
 }
