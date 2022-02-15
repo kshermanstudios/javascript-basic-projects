@@ -37,3 +37,70 @@ const reviews = [
       "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
   },
 ];
+
+
+// Select Items
+const img = document.getElementById('person-img');
+const author = document.getElementById('author');
+const job = document.getElementById('job');
+const info = document.getElementById('info');
+
+// buttons
+const prevBut = document.querySelector('.prev-btn');
+const nextBut = document.querySelector('.next-btn');
+const randomBut = document.querySelector('.random-btn');
+
+// Could also get the buttons like this
+// const btns = document.querySelectorAll('.prev-btn, .next-btn, .random-btn')
+
+// Set stargin Item
+let currentReview = 0;
+
+// Load init items
+window.addEventListener('DOMContentLoaded', function (){
+  showPerson(currentReview);
+});
+
+// show person based on item
+function showPerson(){
+  // access the first array items
+  // assign it to a var first
+  const item = reviews[currentReview];
+  console.log('person ' + currentReview);
+  console.log('item ' + item);
+
+  // update page content via the array data
+  img.src = item.img;
+  author.textContent = item.name;
+  job.textContent = item.job;
+  info.textContent = item.text;
+}
+
+// Show Next Person
+nextBut.addEventListener('click', function(){
+  currentReview++;
+  if(currentReview > reviews.length - 1){
+    currentReview = 0;
+  }
+  showPerson();
+});
+
+// Show Prev Person
+prevBut.addEventListener('click', function(){
+  currentReview--;
+  if(currentReview < 0){
+    currentReview = reviews.length - 1;
+  }
+  showPerson();
+});
+
+// Show Random Person
+randomBut.addEventListener('click', function(){
+  currentReview = Math.floor( Math.random() * reviews.length );
+  if(currentReview == currentReview){
+    currentReview = Math.floor( Math.random() * reviews.length );
+  }
+  showPerson();
+});
+
+
