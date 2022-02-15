@@ -164,6 +164,7 @@ main {
 }
 .container {
   text-align: center;
+  border: solid red 1px;
 }
 #value {
   font-size: 6rem;
