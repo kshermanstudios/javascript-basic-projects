@@ -146,9 +146,9 @@ p {
   }
 }
 main {
-  min-height: 100vh;
+  min-height: 40vh;
   display: grid;
-  place-items: center;
+  place-items: right;
 }
 
 /*
@@ -175,6 +175,7 @@ main {
 .container {
   width: 80vw;
   max-width: var(--fixed-width);
+  border: solid red 1px;
 }
 .review {
   background: var(--clr-white);
