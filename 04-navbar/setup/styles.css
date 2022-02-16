@@ -199,12 +199,13 @@ nav {
   display: none;
 }
 .links {
-  /* height: 0;
+  height: 0;
   overflow: hidden;
-  transition: var(--transition); */
+  transition: var(--transition);
 }
+/* TOGGLE CLASS */
 .show-links {
-  height: 10rem;
+  height: 10rem; /* 160px = 10 * 16 (usual base) */ 
 }
 @media screen and (min-width: 800px) {
   .nav-center {
@@ -221,7 +222,9 @@ nav {
   .nav-toggle {
     display: none;
   }
+
   .links {
+    /* IMPORTANT TO ADD */
     height: auto;
     display: flex;
   }
