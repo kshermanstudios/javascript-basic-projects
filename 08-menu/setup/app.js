@@ -72,3 +72,34 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+
+// when page loads... access menu array and 
+// add to the parent "section-center
+
+const sectionCenter = document.querySelector('.section-center');
+
+window.addEventListener('DOMContentLoaded', function(){
+  // console.log('shake and bake');
+
+  let displayMenu = menu.map(function(item){
+    // console.log(item);
+    // return item;
+
+    return `<article class="menu-item">
+              <img src="${item.img}" class="photo" alt="menu item" />
+              <div class="item-info">
+                <header>
+                <h4>${item.title}</h4>
+                <h4 class="price">${item.price}</h4>
+                </header>
+                <p class="item-text">${item.desc}</p>
+              </div>
+            </article>`;
+  })
+
+  displayMenu = displayMenu.join(''); // remove the commas
+
+  sectionCenter.innerHTML = displayMenu;
+  console.log(displayMenu);
+});
