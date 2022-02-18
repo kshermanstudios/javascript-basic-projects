@@ -1,3 +1,7 @@
+// get only unique categories - hardes part
+// iteract over cats and return buttons
+// make sure to select buttons when they are available 
+
 const menu = [
   {
     id: 1,
@@ -71,6 +75,14 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "steak dinner",
+    category: "dinner",
+    price: 39.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 
@@ -78,65 +90,12 @@ const menu = [
 // add to the parent "section-center
 
 const sectionCenter = document.querySelector('.section-center');
-const filterButtons = document.querySelectorAll('.filter-btn');
+const buttonContainer = document.querySelector('.btn-container');
+
 window.addEventListener('DOMContentLoaded', function(){
   displayMenuItems(menu);
-  
-  // map through the object old way
-  // this works for all items
-  
-  /*
-  let displayMenu = menu.map(function(item){
-  
-    // console.log(item);
-    // return item;
-
-    return `<article class="menu-item">
-              <img src="${item.img}" class="photo" alt="menu item" />
-              <div class="item-info">
-                <header>
-                <h4>${item.title}</h4>
-                <h4 class="price">${item.price}</h4>
-                </header>
-                <p class="item-text">${item.desc}</p>
-              </div>
-            </article>`;
-  });
-
-  
-  // remove the commas
-  displayMenu = displayMenu.join(''); 
-
-  sectionCenter.innerHTML = displayMenu;
-  console.log(displayMenu);*/
+  displayMenuButtons();
 });
-
-// filter items
-filterButtons.forEach(function(btn){
-
-  // when user clicks on any button
-  btn.addEventListener('click', function(e){
-    console.log(e.currentTarget.dataset.id);
-    const catagory = e.currentTarget.dataset.id;
-    
-    // the 'menu' array above is filtered and we can use any name
-    // creates a new array with specific filtered items
-    const menuCategory = menu.filter(function(fox){
-      
-      if(fox.category === catagory){
-        return fox;
-      }
-    });
-    
-    if(catagory === 'all'){
-      displayMenuItems(menu);
-    } else {
-      displayMenuItems(menuCategory);
-    }
-
-  });
-
-})
 
 
 
@@ -161,4 +120,73 @@ function displayMenuItems(menuItems){
   sectionCenter.innerHTML = displayMenu;
   // console.log(displayMenu);
 
+}
+
+
+
+
+
+function displayMenuButtons(){
+
+  // get all
+   /*
+   const categories1 = menu.map(function(item){
+    return item.category;
+   });
+   */
+   // console.log(categories1);
+
+ 
+   // set a reduce to get just our 5 diff buttons
+   // takes 2 parameters, the function to perform and the 
+   const categories2 = menu.reduce(
+     function(difNames, item){
+       // if the cat name IS NOT already in there then add
+       // loops there all the items
+       if(!difNames.includes(item.category)){
+         difNames.push(item.category);
+         // first item 'all' is already in there
+       }
+       return difNames;
+     },
+     ['all'] // pushing the first value - optional
+   );
+ 
+   
+   // console.log(categories2);
+   const categoryBtns = categories2.map(function(category){
+     return `<button class="filter-btn" data-id="${category}">${category}</button>`;
+   }).join('');
+ 
+   // remove the commas and insert
+   buttonContainer.innerHTML = categoryBtns;
+   const filterButtons = document.querySelectorAll('.filter-btn');
+   // console.log(categoryBtns);
+ 
+ 
+   // filter items
+   filterButtons.forEach(function(btn){
+ 
+     // when user clicks on any button
+     btn.addEventListener('click', function(e){
+       // console.log(e.currentTarget.dataset.id);
+       const catagory = e.currentTarget.dataset.id;
+       
+       // the 'menu' array above is filtered and we can use any name
+       // creates a new array with specific filtered items
+       const menuCategory = menu.filter(function(fox){
+         if(fox.category === catagory){
+           return fox;
+         }
+       });
+       
+       if(catagory === 'all'){
+         displayMenuItems(menu);
+       } else {
+         displayMenuItems(menuCategory);
+       }
+ 
+     });
+ 
+   })
 }
