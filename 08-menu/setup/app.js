@@ -78,11 +78,16 @@ const menu = [
 // add to the parent "section-center
 
 const sectionCenter = document.querySelector('.section-center');
-
+const filterButtons = document.querySelectorAll('.filter-btn');
 window.addEventListener('DOMContentLoaded', function(){
-  // console.log('shake and bake');
-
+  displayMenuItems(menu);
+  
+  // map through the object old way
+  // this works for all items
+  
+  /*
   let displayMenu = menu.map(function(item){
+  
     // console.log(item);
     // return item;
 
@@ -96,10 +101,64 @@ window.addEventListener('DOMContentLoaded', function(){
                 <p class="item-text">${item.desc}</p>
               </div>
             </article>`;
-  })
+  });
 
-  displayMenu = displayMenu.join(''); // remove the commas
+  
+  // remove the commas
+  displayMenu = displayMenu.join(''); 
 
   sectionCenter.innerHTML = displayMenu;
-  console.log(displayMenu);
+  console.log(displayMenu);*/
 });
+
+// filter items
+filterButtons.forEach(function(btn){
+
+  // when user clicks on any button
+  btn.addEventListener('click', function(e){
+    console.log(e.currentTarget.dataset.id);
+    const catagory = e.currentTarget.dataset.id;
+    
+    // the 'menu' array above is filtered and we can use any name
+    // creates a new array with specific filtered items
+    const menuCategory = menu.filter(function(fox){
+      
+      if(fox.category === catagory){
+        return fox;
+      }
+    });
+    
+    if(catagory === 'all'){
+      displayMenuItems(menu);
+    } else {
+      displayMenuItems(menuCategory);
+    }
+
+  });
+
+})
+
+
+
+function displayMenuItems(menuItems){
+  
+  let displayMenu = menuItems.map(function(item){
+    return `<article class="menu-item">
+              <img src="${item.img}" class="photo" alt="menu item" />
+              <div class="item-info">
+                <header>
+                <h4>${item.title}</h4>
+                <h4 class="price">${item.price}</h4>
+                </header>
+                <p class="item-text">${item.desc}</p>
+              </div>
+            </article>`;
+  });
+
+  // remove the commas
+  displayMenu = displayMenu.join(''); 
+
+  sectionCenter.innerHTML = displayMenu;
+  // console.log(displayMenu);
+
+}
