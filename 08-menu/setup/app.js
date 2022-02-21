@@ -83,6 +83,23 @@ const menu = [
     img: "./images/item-10.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 11,
+    title: "spinach salad",
+    category: "salads",
+    price: 6.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
+  ,
+  {
+    id: 12,
+    title: "pear salad",
+    category: "salads",
+    price: 7.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 
@@ -120,7 +137,7 @@ function displayMenuItems(menuItems){
   sectionCenter.innerHTML = displayMenu;
   // console.log(displayMenu);
 
-}
+} // END displayMenuItems
 
 
 
@@ -158,35 +175,39 @@ function displayMenuButtons(){
      return `<button class="filter-btn" data-id="${category}">${category}</button>`;
    }).join('');
  
-   // remove the commas and insert
+   // remove the commas above and insert
    buttonContainer.innerHTML = categoryBtns;
-   const filterButtons = document.querySelectorAll('.filter-btn');
-   // console.log(categoryBtns);
+   const filterButtons = buttonContainer.querySelectorAll('.filter-btn');
+   // console.log(filterButtons);
  
  
    // filter items
    filterButtons.forEach(function(btn){
  
-     // when user clicks on any button
-     btn.addEventListener('click', function(e){
+    // when user clicks on any button
+    btn.addEventListener('click', function(e){
        // console.log(e.currentTarget.dataset.id);
+       // look for the dataset property of 'id'
        const catagory = e.currentTarget.dataset.id;
        
        // the 'menu' array above is filtered and we can use any name
-       // creates a new array with specific filtered items
-       const menuCategory = menu.filter(function(fox){
-         if(fox.category === catagory){
-           return fox;
-         }
+       // creates a NEW array with specific filtered items
+       const menuCategory = menu.filter(function(menuItem){
+        // console.log(menuItem.category);
+        if(menuItem.category === catagory){
+          return menuItem;
+        }
        });
-       
+
+    
+       // console.log(menuCategory); // 3 items in array
        if(catagory === 'all'){
-         displayMenuItems(menu);
-       } else {
-         displayMenuItems(menuCategory);
-       }
- 
-     });
+          displayMenuItems(menu);
+        } else {
+          displayMenuItems(menuCategory);
+        }
+    });
  
    })
-}
+
+} // END displayMenuButtons
