@@ -15,6 +15,7 @@ window.addEventListener('load', function(){
     preloader.classList.add('hide-preloader');
 });
 
+
 // when user clicks on any button
 switchButton.addEventListener('click', function(e){
     console.log('clicked');
